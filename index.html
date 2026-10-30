@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Aula Extra 3: Mega Tabela de Verbos Irregulares</title>
+    
+    <!-- Fontes do Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- RESET E BASE --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            background-color: #f0f2f5;
+            color: #333;
+            -webkit-font-smoothing: antialiased;
+            padding: 20px 10px;
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        /* --- TIPOGRAFIA --- */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            font-size: 1.9rem;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #e74c3c;
+            line-height: 1.3;
+        }
+
+        p { font-size: 1rem; margin-bottom: 12px; color: #444; }
+        .emoji-large { font-size: 1.4rem; }
+
+        /* --- INTRODUÇÃO --- */
+        .theme-intro {
+            background-color: #fdf2e9;
+            border-left: 5px solid #e67e22;
+            padding: 20px;
+            margin: 20px 0 30px 0;
+            border-radius: 8px;
+            page-break-inside: avoid;
+        }
+
+        /* --- BOTÕES DE NAVEGAÇÃO E ÁUDIO --- */
+        .nav-btn {
+            display: block;
+            width: 100%;
+            background-color: #34495e;
+            color: white;
+            text-align: center;
+            padding: 14px;
+            margin: 15px 0 25px 0;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .nav-btn:hover { background-color: #2c3e50; }
+        
+        .audio-btn-word {
+            background-color: #eef6fc;
+            border: 1px solid #cce3f6;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            padding: 2px 6px;
+            margin-left: 6px;
+            vertical-align: middle;
+            transition: all 0.15s;
+        }
+        .audio-btn-word:hover { background-color: #3498db; color: #fff; }
+        .audio-btn-word:active { transform: scale(0.92); }
+
+        .audio-btn-inline {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            vertical-align: middle;
+            margin-left: 6px;
+            padding: 2px 4px;
+            transition: transform 0.1s;
+        }
+        .audio-btn-inline:active { transform: scale(0.9); }
+
+        /* --- BLOCOS DE VERBOS --- */
+        .verb-card {
+            border: 1px solid #dcdde1;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 28px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            page-break-inside: avoid;
+        }
+
+        .verb-card-header {
+            background: linear-gradient(90deg, #2c3e50 0%, #34495e 100%);
+            color: #fff;
+            padding: 12px 18px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .verb-card-header .translation {
+            font-size: 0.95rem;
+            color: #f1c40f;
+            font-weight: 600;
+        }
+
+        .verb-conj-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .verb-conj-table th {
+            background-color: #ecf0f1;
+            color: #2c3e50;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 2px solid #bdc3c7;
+        }
+
+        .verb-conj-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+            font-size: 0.95rem;
+        }
+
+        .verb-conj-table tr:nth-child(even) { background-color: #fafafa; }
+        .verb-conj-table tr:hover { background-color: #f1f7fd; }
+
+        .col-tense {
+            width: 24%;
+            font-weight: 600;
+            color: #576574;
+            font-size: 0.85rem;
+        }
+
+        .col-word {
+            width: 24%;
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 700;
+            color: #c0392b;
+            font-size: 1rem;
+            white-space: nowrap;
+        }
+
+        .col-example {
+            width: 52%;
+        }
+
+        .example-en {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .example-en b {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        .example-pt {
+            display: block;
+            color: #27ae60;
+            font-style: italic;
+            font-size: 0.88rem;
+            margin-top: 2px;
+        }
+
+        /* --- RESPONSIVIDADE MOBILE --- */
+        @media (max-width: 700px) {
+            .container { padding: 15px; }
+            .verb-conj-table thead { display: none; }
+            .verb-conj-table tr {
+                display: block;
+                border-bottom: 2px solid #e0e0e0;
+                padding: 8px 0;
+            }
+            .verb-conj-table td {
+                display: block;
+                width: 100%;
+                border: none;
+                padding: 4px 12px;
+            }
+            .col-tense { color: #7f8c8d; font-size: 0.78rem; text-transform: uppercase; }
+            .col-word { font-size: 1.05rem; margin-bottom: 4px; }
+        }
+
+        /* --- IMPRESSÃO A4 EM PDF --- */
+        @media print {
+            body { background-color: #fff; padding: 0; font-size: 11pt; }
+            .container { box-shadow: none; max-width: 100%; padding: 0; }
+            .nav-btn, .audio-btn-inline, .audio-btn-word { display: none !important; }
+            .verb-card { page-break-inside: avoid; margin-bottom: 18px; border: 1px solid #999; }
+            .verb-card-header { background: #2c3e50 !important; color: #fff !important; padding: 8px 14px; }
+            .verb-conj-table td, .verb-conj-table th { padding: 6px 10px; }
+            * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- BOTÃO TOPO -->
+        <button class="nav-btn" onclick="window.location.href='https://espaco-liberdade.github.io/inglesipa/'">⬅ Voltar ao Menu Principal</button>
+        
+        <h1>Aula Extra 3: Mega Tabela de Conjugação dos 30 Verbos Irregulares <span class="emoji-large">📚🔊</span><br>
+            <span style="font-size: 0.6em; font-weight: normal; color: #555;">(Áudio Individual por Palavra + Frase de Exemplo para Cada Conjugação)</span>
+        </h1>
+        
+        <div class="theme-intro">
+            <p><strong>Guia Definitivo de Pronúncia e Conjugação Prática!</strong></p>
+            <p>Nesta aula especial, cada um dos <strong>30 verbos irregulares mais importantes do inglês</strong> é destrinchado em todas as suas formas essenciais: Presente (Base e 3ª Pessoa), Passado Simples (V2), Particípio Passado (V3), Gerúndio (-ING) e Futuro (Will).</p>
+            <p>🎧 <strong>Como estudar:</strong> Clique no botão de áudio ao lado de <strong>cada palavra conjugada</strong> para treinar a pronúncia isolada e, em seguida, escute a <strong>frase de exemplo exclusiva</strong> daquela exata conjugação!</p>
+        </div>
+
+        <!-- CONTAINER ONDE OS 30 VERBOS COMPLETOS SÃO RENDERIZADOS -->
+        <div id="verbs-container"></div>
+
+        <!-- BOTÃO RODAPÉ -->
+        <button class="nav-btn" onclick="window.location.href='https://espaco-liberdade.github.io/inglesipa/'" style="margin-top: 30px;">⬅ Voltar ao Menu Principal</button>
+    </div>
+
+    <script>
+        // BASE COMPLETA DOS 30 VERBOS IRREGULARES COM CADA CONJUGAÇÃO E FRASE EXCLUSIVA
+        // Formato de cada linha: [Tempo Verbal, Palavra Exibida, Palavra p/ Áudio TTS, Frase em Inglês (com <b>), Tradução]
+        const verbsData = [
+            {
+                num: 1, verb: "BE", pt: "Ser / Estar",
+                rows: [
+                    ["Present (I)", "am", "am", "I <b>am</b> very happy with my progress.", "Eu estou muito feliz com o meu progresso."],
+                    ["Present (He/She/It)", "is", "is", "She <b>is</b> a very dedicated student.", "Ela é uma aluna muito dedicada."],
+                    ["Present (You/We/They)", "are", "are", "You <b>are</b> my best friend.", "Você é meu melhor amigo."],
+                    ["Past Simple (I/He/She/It)", "was", "was", "He <b>was</b> tired after the long trip.", "Ele estava cansado após a longa viagem."],
+                    ["Past Simple (You/We/They)", "were", "were", "We <b>were</b> at the beach yesterday.", "Nós estávamos na praia ontem."],
+                    ["Past Participle (V3)", "been", "been", "I have <b>been</b> to London twice.", "Eu estive em Londres duas vezes."],
+                    ["Gerund (-ING)", "being", "being", "Stop <b>being</b> so dramatic about it.", "Pare de ser tão dramático com isso."],
+                    ["Future Simple", "will be", "will be", "They <b>will be</b> here in ten minutes.", "Eles estarão aqui em dez minutos."]
+                ]
+            },
+            {
+                num: 2, verb: "BECOME", pt: "Tornar-se / Ficar",
+                rows: [
+                    ["Present (I/You/We/They)", "become", "become", "Caterpillars <b>become</b> butterflies.", "Lagartas se tornam borboletas."],
+                    ["Present 3ª P. (He/She/It)", "becomes", "becomes", "He <b>becomes</b> nervous before exams.", "Ele fica (torna-se) nervoso antes das provas."],
+                    ["Past Simple (V2)", "became", "became", "She <b>became</b> a doctor last year.", "Ela se tornou médica no ano passado."],
+                    ["Past Participle (V3)", "become", "become", "This has <b>become</b> a serious issue.", "Isso se tornou um problema sério."],
+                    ["Gerund (-ING)", "becoming", "becoming", "The weather is <b>becoming</b> colder.", "O clima está ficando (se tornando) mais frio."],
+                    ["Future Simple", "will become", "will become", "You <b>will become</b> fluent very soon.", "Você se tornará fluente muito em breve."]
+                ]
+            },
+            {
+                num: 3, verb: "BEGIN", pt: "Começar / Iniciar",
+                rows: [
+                    ["Present (I/You/We/They)", "begin", "begin", "We <b>begin</b> our work at 9 AM.", "Nós começamos nosso trabalho às 9h."],
+                    ["Present 3ª P. (He/She/It)", "begins", "begins", "The class <b>begins</b> early on Mondays.", "A aula começa cedo às segundas-feiras."],
+                    ["Past Simple (V2)", "began", "began", "It <b>began</b> to rain suddenly.", "Começou a chover de repente."],
+                    ["Past Participle (V3)", "begun", "begun", "The movie has already <b>begun</b>.", "O filme já começou."],
+                    ["Gerund (-ING)", "beginning", "beginning", "I am <b>beginning</b> to understand the rule.", "Estou começando a entender a regra."],
+                    ["Future Simple", "will begin", "will begin", "The concert <b>will begin</b> at 8 PM.", "O show começará às 20h."]
+                ]
+            },
+            {
+                num: 4, verb: "BRING", pt: "Trazer",
+                rows: [
+                    ["Present (I/You/We/They)", "bring", "bring", "They always <b>bring</b> good news.", "Eles sempre trazem boas notícias."],
+                    ["Present 3ª P. (He/She/It)", "brings", "brings", "She <b>brings</b> her lunch to work.", "Ela traz o almoço dela para o trabalho."],
+                    ["Past Simple (V2)", "brought", "brought", "He <b>brought</b> some coffee for us.", "Ele trouxe um pouco de café para nós."],
+                    ["Past Participle (V3)", "brought", "brought", "Have you <b>brought</b> the documents?", "Você trouxe os documentos?"],
+                    ["Gerund (-ING)", "bringing", "bringing", "Are you <b>bringing</b> your umbrella?", "Você está trazendo seu guarda-chuva?"],
+                    ["Future Simple", "will bring", "will bring", "I <b>will bring</b> dessert tonight.", "Eu trarei a sobremesa hoje à noite."]
+                ]
+            },
+            {
+                num: 5, verb: "BUY", pt: "Comprar",
+                rows: [
+                    ["Present (I/You/We/They)", "buy", "buy", "We <b>buy</b> fresh vegetables every week.", "Nós compramos vegetais frescos toda semana."],
+                    ["Present 3ª P. (He/She/It)", "buys", "buys", "He <b>buys</b> a newspaper every morning.", "Ele compra um jornal todas as manhãs."],
+                    ["Past Simple (V2)", "bought", "bought", "I <b>bought</b> a new laptop yesterday.", "Eu comprei um notebook novo ontem."],
+                    ["Past Participle (V3)", "bought", "bought", "They have just <b>bought</b> a new house.", "Eles acabaram de comprar uma casa nova."],
+                    ["Gerund (-ING)", "buying", "buying", "She is <b>buying</b> tickets for the show.", "Ela está comprando ingressos para o show."],
+                    ["Future Simple", "will buy", "will buy", "I <b>will buy</b> a new car next year.", "Eu comprarei um carro novo no ano que vem."]
+                ]
+            },
+            {
+                num: 6, verb: "CHOOSE", pt: "Escolher",
+                rows: [
+                    ["Present (I/You/We/They)", "choose", "choose", "You always <b>choose</b> the best restaurants.", "Você sempre escolhe os melhores restaurantes."],
+                    ["Present 3ª P. (He/She/It)", "chooses", "chooses", "She <b>chooses</b> her words carefully.", "Ela escolhe as palavras com cuidado."],
+                    ["Past Simple (V2)", "chose", "chose", "He <b>chose</b> the blue shirt.", "Ele escolheu a camisa azul."],
+                    ["Past Participle (V3)", "chosen", "chosen", "We have <b>chosen</b> our destination.", "Nós escolhemos o nosso destino."],
+                    ["Gerund (-ING)", "choosing", "choosing", "They are <b>choosing</b> a movie right now.", "Eles estão escolhendo um filme agora mesmo."],
+                    ["Future Simple", "will choose", "will choose", "The jury <b>will choose</b> the winner tomorrow.", "O júri escolherá o vencedor amanhã."]
+                ]
+            },
+            {
+                num: 7, verb: "COME", pt: "Vir / Chegar",
+                rows: [
+                    ["Present (I/You/We/They)", "come", "come", "I <b>come</b> here every Saturday.", "Eu venho aqui todo sábado."],
+                    ["Present 3ª P. (He/She/It)", "comes", "comes", "The train <b>comes</b> at 7 o'clock.", "O trem vem às 7 horas."],
+                    ["Past Simple (V2)", "came", "came", "She <b>came</b> to the party very late.", "Ela veio para a festa muito tarde."],
+                    ["Past Participle (V3)", "come", "come", "Have they <b>come</b> back from lunch?", "Eles já voltaram (vieram) do almoço?"],
+                    ["Gerund (-ING)", "coming", "coming", "Wait for me, I am <b>coming</b>!", "Espere por mim, eu estou indo (vindo)!"],
+                    ["Future Simple", "will come", "will come", "He <b>will come</b> with us tomorrow.", "Ele virá conosco amanhã."]
+                ]
+            },
+            {
+                num: 8, verb: "DO", pt: "Fazer / Executar",
+                rows: [
+                    ["Present (I/You/We/They)", "do", "do", "I <b>do</b> my exercises in the morning.", "Eu faço meus exercícios de manhã."],
+                    ["Present 3ª P. (He/She/It)", "does", "does", "She <b>does</b> her job impeccably.", "Ela faz o trabalho dela impecavelmente."],
+                    ["Past Simple (V2)", "did", "did", "We <b>did</b> everything we could.", "Nós fizemos tudo o que podíamos."],
+                    ["Past Participle (V3)", "done", "done", "I have already <b>done</b> my homework.", "Eu já fiz meu dever de casa."],
+                    ["Gerund (-ING)", "doing", "doing", "What are you <b>doing</b> right now?", "O que você está fazendo agora?"],
+                    ["Future Simple", "will do", "will do", "I <b>will do</b> the dishes after dinner.", "Eu lavarei (farei) a louça depois do jantar."]
+                ]
+            },
+            {
+                num: 9, verb: "DRINK", pt: "Beber",
+                rows: [
+                    ["Present (I/You/We/They)", "drink", "drink", "I <b>drink</b> two liters of water a day.", "Eu bebo dois litros de água por dia."],
+                    ["Present 3ª P. (He/She/It)", "drinks", "drinks", "He only <b>drinks</b> black coffee.", "Ele só bebe café puro."],
+                    ["Past Simple (V2)", "drank", "drank", "She <b>drank</b> a glass of milk.", "Ela bebeu um copo de leite."],
+                    ["Past Participle (V3)", "drunk", "drunk", "Who has <b>drunk</b> all the juice?", "Quem bebeu todo o suco?"],
+                    ["Gerund (-ING)", "drinking", "drinking", "They are <b>drinking</b> tea in the garden.", "Eles estão bebendo chá no jardim."],
+                    ["Future Simple", "will drink", "will drink", "We <b>will drink</b> a toast to your success.", "Nós beberemos um brinde ao seu sucesso."]
+                ]
+            },
+            {
+                num: 10, verb: "DRIVE", pt: "Dirigir / Conduzir",
+                rows: [
+                    ["Present (I/You/We/They)", "drive", "drive", "I <b>drive</b> to work every day.", "Eu dirijo para o trabalho todos os dias."],
+                    ["Present 3ª P. (He/She/It)", "drives", "drives", "My mother <b>drives</b> very carefully.", "Minha mãe dirige com muito cuidado."],
+                    ["Past Simple (V2)", "drove", "drove", "We <b>drove</b> to the beach last Sunday.", "Nós dirigimos até a praia no domingo passado."],
+                    ["Past Participle (V3)", "driven", "driven", "Have you ever <b>driven</b> a sports car?", "Você já dirigiu um carro esportivo?"],
+                    ["Gerund (-ING)", "driving", "driving", "He is <b>driving</b> home right now.", "Ele está dirigindo para casa agora mesmo."],
+                    ["Future Simple", "will drive", "will drive", "I <b>will drive</b> you to the station.", "Eu levarei você de carro até a estação."]
+                ]
+            },
+            {
+                num: 11, verb: "EAT", pt: "Comer",
+                rows: [
+                    ["Present (I/You/We/They)", "eat", "eat", "We usually <b>eat</b> dinner at 8 PM.", "Nós geralmente jantamos (comemos) às 20h."],
+                    ["Present 3ª P. (He/She/It)", "eats", "eats", "She <b>eats</b> fruit for breakfast.", "Ela come fruta no café da manhã."],
+                    ["Past Simple (V2)", "ate", "ate", "I <b>ate</b> a delicious burger yesterday.", "Eu comi um hambúrguer delicioso ontem."],
+                    ["Past Participle (V3)", "eaten", "eaten", "Have you <b>eaten</b> lunch yet?", "Você já almoçou (comeu o almoço)?"],
+                    ["Gerund (-ING)", "eating", "eating", "They are <b>eating</b> pizza in the kitchen.", "Eles estão comendo pizza na cozinha."],
+                    ["Future Simple", "will eat", "will eat", "We <b>will eat</b> as soon as he arrives.", "Nós comeremos assim que ele chegar."]
+                ]
+            },
+            {
+                num: 12, verb: "FIND", pt: "Encontrar / Achar",
+                rows: [
+                    ["Present (I/You/We/They)", "find", "find", "I always <b>find</b> good deals online.", "Eu sempre encontro boas ofertas online."],
+                    ["Present 3ª P. (He/She/It)", "finds", "finds", "He <b>finds</b> it easy to learn languages.", "Ele acha fácil aprender idiomas."],
+                    ["Past Simple (V2)", "found", "found", "She <b>found</b> her lost keys in the car.", "Ela encontrou suas chaves perdidas no carro."],
+                    ["Past Participle (V3)", "found", "found", "Scientists have <b>found</b> a new species.", "Os cientistas encontraram uma nova espécie."],
+                    ["Gerund (-ING)", "finding", "finding", "We are <b>finding</b> new ways to help.", "Estamos encontrando novas maneiras de ajudar."],
+                    ["Future Simple", "will find", "will find", "You <b>will find</b> the book on the shelf.", "Você encontrará o livro na prateleira."]
+                ]
+            },
+            {
+                num: 13, verb: "FLY", pt: "Voar",
+                rows: [
+                    ["Present (I/You/We/They)", "fly", "fly", "Birds <b>fly</b> south in the winter.", "Os pássaros voam para o sul no inverno."],
+                    ["Present 3ª P. (He/She/It)", "flies", "flies", "Time <b>flies</b> when we are together.", "O tempo voa quando estamos juntos."],
+                    ["Past Simple (V2)", "flew", "flew", "We <b>flew</b> business class to Madrid.", "Nós voamos de classe executiva para Madri."],
+                    ["Past Participle (V3)", "flown", "flown", "She has <b>flown</b> on an airplane many times.", "Ela já voou de avião muitas vezes."],
+                    ["Gerund (-ING)", "flying", "flying", "Look at that hawk <b>flying</b> above us.", "Olhe para aquele falcão voando acima de nós."],
+                    ["Future Simple", "will fly", "will fly", "They <b>will fly</b> to Tokyo tomorrow.", "Eles voarão para Tóquio amanhã."]
+                ]
+            },
+            {
+                num: 14, verb: "FORGET", pt: "Esquecer",
+                rows: [
+                    ["Present (I/You/We/They)", "forget", "forget", "Don't <b>forget</b> to lock the door.", "Não se esqueça de trancar a porta."],
+                    ["Present 3ª P. (He/She/It)", "forgets", "forgets", "He always <b>forgets</b> where he parks.", "Ele sempre esquece onde estaciona."],
+                    ["Past Simple (V2)", "forgot", "forgot", "I completely <b>forgot</b> about the meeting.", "Eu esqueci completamente da reunião."],
+                    ["Past Participle (V3)", "forgotten", "forgotten", "She has <b>forgotten</b> her password again.", "Ela esqueceu a senha dela de novo."],
+                    ["Gerund (-ING)", "forgetting", "forgetting", "I keep <b>forgetting</b> his last name.", "Eu vivo esquecendo o sobrenome dele."],
+                    ["Future Simple", "will forget", "will forget", "I <b>will</b> never <b>forget</b> your kindness.", "Eu nunca esquecerei a sua gentileza."]
+                ]
+            },
+            {
+                num: 15, verb: "GET", pt: "Obter / Conseguir / Ficar / Chegar",
+                rows: [
+                    ["Present (I/You/We/They)", "get", "get", "What time do you <b>get</b> home?", "A que horas você chega em casa?"],
+                    ["Present 3ª P. (He/She/It)", "gets", "gets", "It <b>gets</b> dark early in the winter.", "Fica escuro cedo no inverno."],
+                    ["Past Simple (V2)", "got", "got", "She <b>got</b> a new job last week.", "Ela conseguiu um emprego novo na semana passada."],
+                    ["Past Participle (V3)", "gotten", "gotten", "He has <b>gotten</b> much better at English.", "Ele ficou muito melhor no inglês."],
+                    ["Gerund (-ING)", "getting", "getting", "We are <b>getting</b> ready for the trip.", "Estamos ficando prontos para a viagem."],
+                    ["Future Simple", "will get", "will get", "You <b>will get</b> your certificate soon.", "Você receberá (obterá) seu certificado em breve."]
+                ]
+            },
+            {
+                num: 16, verb: "GIVE", pt: "Dar / Entregar",
+                rows: [
+                    ["Present (I/You/We/They)", "give", "give", "They <b>give</b> money to charity every year.", "Eles dão dinheiro para a caridade todo ano."],
+                    ["Present 3ª P. (He/She/It)", "gives", "gives", "This tree <b>gives</b> a lot of shade.", "Esta árvore dá muita sombra."],
+                    ["Past Simple (V2)", "gave", "gave", "My father <b>gave</b> me a watch.", "Meu pai me deu um relógio."],
+                    ["Past Participle (V3)", "given", "given", "She has <b>given</b> me great advice.", "Ela tem me dado ótimos conselhos."],
+                    ["Gerund (-ING)", "giving", "giving", "He is <b>giving</b> a speech right now.", "Ele está dando (fazendo) um discurso agora."],
+                    ["Future Simple", "will give", "will give", "I <b>will give</b> you a answer tomorrow.", "Eu darei uma resposta a você amanhã."]
+                ]
+            },
+            {
+                num: 17, verb: "GO", pt: "Ir / Partir",
+                rows: [
+                    ["Present (I/You/We/They)", "go", "go", "We <b>go</b> to the supermarket on Fridays.", "Nós vamos ao supermercado às sextas-feiras."],
+                    ["Present 3ª P. (He/She/It)", "goes", "goes", "She <b>goes</b> to the gym every morning.", "Ela vai à academia todas as manhãs."],
+                    ["Past Simple (V2)", "went", "went", "They <b>went</b> to Paris on their vacation.", "Eles foram para Paris nas férias deles."],
+                    ["Past Participle (V3)", "gone", "gone", "He isn't here; he has <b>gone</b> home.", "Ele não está aqui; ele foi para casa."],
+                    ["Gerund (-ING)", "going", "going", "Where are you <b>going</b> so fast?", "Para onde você está indo tão rápido?"],
+                    ["Future Simple", "will go", "will go", "I <b>will go</b> with you to the doctor.", "Eu irei com você ao médico."]
+                ]
+            },
+            {
+                num: 18, verb: "HAVE", pt: "Ter / Possuir",
+                rows: [
+                    ["Present (I/You/We/They)", "have", "have", "I <b>have</b> a lot of work today.", "Eu tenho muito trabalho hoje."],
+                    ["Present 3ª P. (He/She/It)", "has", "has", "She <b>has</b> two cats and a dog.", "Ela tem dois gatos e um cachorro."],
+                    ["Past Simple (V2)", "had", "had", "We <b>had</b> a wonderful time last night.", "Nós tivemos um momento maravilhoso ontem à noite."],
+                    ["Past Participle (V3)", "had", "had", "I have <b>had</b> this phone for three years.", "Eu tenho (tenho tido) este celular há três anos."],
+                    ["Gerund (-ING)", "having", "having", "They are <b>having</b> breakfast right now.", "Eles estão tomando café da manhã agora."],
+                    ["Future Simple", "will have", "will have", "You <b>will have</b> another opportunity.", "Você terá outra oportunidade."]
+                ]
+            },
+            {
+                num: 19, verb: "KNOW", pt: "Saber / Conhecer",
+                rows: [
+                    ["Present (I/You/We/They)", "know", "know", "I <b>know</b> the answer to that question.", "Eu sei a resposta para aquela pergunta."],
+                    ["Present 3ª P. (He/She/It)", "knows", "knows", "He <b>knows</b> everyone in this neighborhood.", "Ele conhece todo mundo neste bairro."],
+                    ["Past Simple (V2)", "knew", "knew", "She <b>knew</b> the truth from the start.", "Ela sabia a verdade desde o começo."],
+                    ["Past Participle (V3)", "known", "known", "We have <b>known</b> each other since school.", "Nós nos conhecemos desde a época da escola."],
+                    ["Gerund (-ING)", "knowing", "knowing", "She smiled, <b>knowing</b> she was right.", "Ela sorriu, sabendo que estava certa."],
+                    ["Future Simple", "will know", "will know", "Soon we <b>will know</b> the final result.", "Em breve nós saberemos o resultado final."]
+                ]
+            },
+            {
+                num: 20, verb: "MAKE", pt: "Fazer / Criar / Fabricar",
+                rows: [
+                    ["Present (I/You/We/They)", "make", "make", "You <b>make</b> me very happy.", "Você me faz muito feliz."],
+                    ["Present 3ª P. (He/She/It)", "makes", "makes", "My grandmother <b>makes</b> delicious bread.", "Minha avó faz um pão delicioso."],
+                    ["Past Simple (V2)", "made", "made", "I <b>made</b> a reservation for two.", "Eu fiz uma reserva para dois."],
+                    ["Past Participle (V3)", "made", "made", "This table is <b>made</b> of solid wood.", "Esta mesa é feita de madeira maciça."],
+                    ["Gerund (-ING)", "making", "making", "She is <b>making</b> a chocolate cake.", "Ela está fazendo um bolo de chocolate."],
+                    ["Future Simple", "will make", "will make", "We <b>will make</b> a decision tomorrow.", "Nós tomaremos (faremos) uma decisão amanhã."]
+                ]
+            },
+            {
+                num: 21, verb: "READ", pt: "Ler",
+                rows: [
+                    ["Present (I/You/We/They)", "read (/riːd/)", "read", "I <b>read</b> before going to sleep.", "Eu leio antes de ir dormir."],
+                    ["Present 3ª P. (He/She/It)", "reads (/riːdz/)", "reads", "She <b>reads</b> ten books a year.", "Ela lê dez livros por ano."],
+                    ["Past Simple (V2)", "read (/red/)", "red", "He <b>read</b> the whole newspaper yesterday.", "Ele leu o jornal inteiro ontem.", "He red the whole newspaper yesterday."],
+                    ["Past Participle (V3)", "read (/red/)", "red", "Have you <b>read</b> this article yet?", "Você já leu este artigo?", "Have you red this article yet?"],
+                    ["Gerund (-ING)", "reading", "reading", "I am <b>reading</b> a biography right now.", "Estou lendo uma biografia agora mesmo."],
+                    ["Future Simple", "will read", "will read", "I <b>will read</b> your email later.", "Eu lerei o seu e-mail mais tarde."]
+                ]
+            },
+            {
+                num: 22, verb: "RUN", pt: "Correr / Administrar",
+                rows: [
+                    ["Present (I/You/We/They)", "run", "run", "We <b>run</b> in the park every Sunday.", "Nós corremos no parque todo domingo."],
+                    ["Present 3ª P. (He/She/It)", "runs", "runs", "She <b>runs</b> her own company.", "Ela administra (corre) a própria empresa."],
+                    ["Past Simple (V2)", "ran", "ran", "He <b>ran</b> fast to catch the bus.", "Ele correu rápido para pegar o ônibus."],
+                    ["Past Participle (V3)", "run", "run", "I have never <b>run</b> a marathon.", "Eu nunca corri uma maratona."],
+                    ["Gerund (-ING)", "running", "running", "Why are they <b>running</b> away?", "Por que eles estão fugindo (correndo)?"],
+                    ["Future Simple", "will run", "will run", "He <b>will run</b> for president next year.", "Ele concorrerá à presidência no ano que vem."]
+                ]
+            },
+            {
+                num: 23, verb: "SAY", pt: "Dizer",
+                rows: [
+                    ["Present (I/You/We/They)", "say", "say", "People <b>say</b> this restaurant is great.", "As pessoas dizem que este restaurante é ótimo."],
+                    ["Present 3ª P. (He/She/It)", "says", "says", "The sign <b>says</b> 'Do not enter'.", "A placa diz 'Não entre'."],
+                    ["Past Simple (V2)", "said", "said", "She <b>said</b> goodbye and left.", "Ela disse adeus e saiu."],
+                    ["Past Participle (V3)", "said", "said", "What have you <b>said</b> to him?", "O que você disse a ele?"],
+                    ["Gerund (-ING)", "saying", "saying", "I understand what you are <b>saying</b>.", "Eu entendo o que você está dizendo."],
+                    ["Future Simple", "will say", "will say", "What <b>will</b> she <b>say</b> about this?", "O que ela dirá sobre isso?"]
+                ]
+            },
+            {
+                num: 24, verb: "SEE", pt: "Ver / Enxergar",
+                rows: [
+                    ["Present (I/You/We/They)", "see", "see", "I <b>see</b> two birds on the tree.", "Eu vejo dois pássaros na árvore."],
+                    ["Present 3ª P. (He/She/It)", "sees", "sees", "He always <b>sees</b> the positive side.", "Ele sempre vê o lado positivo."],
+                    ["Past Simple (V2)", "saw", "saw", "We <b>saw</b> a shooting star last night.", "Nós vimos uma estrela cadente ontem à noite."],
+                    ["Past Participle (V3)", "seen", "seen", "I have never <b>seen</b> snow before.", "Eu nunca vi neve antes."],
+                    ["Gerund (-ING)", "seeing", "seeing", "<b>Seeing</b> is believing.", "Ver para crer (Ver é acreditar)."],
+                    ["Future Simple", "will see", "will see", "I <b>will see</b> you at the meeting.", "Eu verei você na reunião."]
+                ]
+            },
+            {
+                num: 25, verb: "SING", pt: "Cantar",
+                rows: [
+                    ["Present (I/You/We/They)", "sing", "sing", "You <b>sing</b> very well!", "Você canta muito bem!"],
+                    ["Present 3ª P. (He/She/It)", "sings", "sings", "She <b>sings</b> in the shower every day.", "Ela canta no chuveiro todos os dias."],
+                    ["Past Simple (V2)", "sang", "sang", "They <b>sang</b> my favorite song.", "Eles cantaram a minha música favorita."],
+                    ["Past Participle (V3)", "sung", "sung", "The national anthem was <b>sung</b> proudly.", "O hino nacional foi cantado com orgulho."],
+                    ["Gerund (-ING)", "singing", "singing", "Listen to the birds <b>singing</b>.", "Ouça os pássaros cantando."],
+                    ["Future Simple", "will sing", "will sing", "She <b>will sing</b> at the wedding.", "Ela cantará no casamento."]
+                ]
+            },
+            {
+                num: 26, verb: "SPEAK", pt: "Falar",
+                rows: [
+                    ["Present (I/You/We/They)", "speak", "speak", "Do you <b>speak</b> Portuguese?", "Você fala português?"],
+                    ["Present 3ª P. (He/She/It)", "speaks", "speaks", "He <b>speaks</b> four languages fluently.", "Ele fala quatro idiomas fluentemente."],
+                    ["Past Simple (V2)", "spoke", "spoke", "I <b>spoke</b> with the director this morning.", "Eu falei com o diretor esta manhã."],
+                    ["Past Participle (V3)", "spoken", "spoken", "English is <b>spoken</b> all over the world.", "O inglês é falado no mundo todo."],
+                    ["Gerund (-ING)", "speaking", "speaking", "Generally <b>speaking</b>, the plan worked.", "De modo geral (Geralmente falando), o plano funcionou."],
+                    ["Future Simple", "will speak", "will speak", "I <b>will speak</b> to him tomorrow.", "Eu falarei com ele amanhã."]
+                ]
+            },
+            {
+                num: 27, verb: "TAKE", pt: "Pegar / Levar / Tomar",
+                rows: [
+                    ["Present (I/You/We/They)", "take", "take", "I <b>take</b> the subway to work.", "Eu pego o metrô para o trabalho."],
+                    ["Present 3ª P. (He/She/It)", "takes", "takes", "It <b>takes</b> an hour to get there.", "Leva uma hora para chegar lá."],
+                    ["Past Simple (V2)", "took", "took", "She <b>took</b> a photo of the sunset.", "Ela tirou (pegou) uma foto do pôr do sol."],
+                    ["Past Participle (V3)", "taken", "taken", "Have you <b>taken</b> your medicine today?", "Você já tomou seu remédio hoje?"],
+                    ["Gerund (-ING)", "taking", "taking", "He is <b>taking</b> a nap right now.", "Ele está tirando um cochilo agora mesmo."],
+                    ["Future Simple", "will take", "will take", "I <b>will take</b> care of everything.", "Eu cuidarei (tomarei conta) de tudo."]
+                ]
+            },
+            {
+                num: 28, verb: "THINK", pt: "Pensar / Achar",
+                rows: [
+                    ["Present (I/You/We/They)", "think", "think", "I <b>think</b> you are completely right.", "Eu acho que você está completamente certo."],
+                    ["Present 3ª P. (He/She/It)", "thinks", "thinks", "She <b>thinks</b> about her future a lot.", "Ela pensa muito no futuro dela."],
+                    ["Past Simple (V2)", "thought", "thought", "I <b>thought</b> the bank was open.", "Eu pensei que o banco estava aberto."],
+                    ["Past Participle (V3)", "thought", "thought", "Have you <b>thought</b> about my proposal?", "Você pensou sobre a minha proposta?"],
+                    ["Gerund (-ING)", "thinking", "thinking", "We are <b>thinking</b> of buying a house.", "Estamos pensando em comprar uma casa."],
+                    ["Future Simple", "will think", "will think", "I <b>will think</b> it over tonight.", "Eu vou refletir (pensar) sobre isso hoje à noite."]
+                ]
+            },
+            {
+                num: 29, verb: "UNDERSTAND", pt: "Entender / Compreender",
+                rows: [
+                    ["Present (I/You/We/They)", "understand", "understand", "I <b>understand</b> how you feel.", "Eu entendo como você se sente."],
+                    ["Present 3ª P. (He/She/It)", "understands", "understands", "He <b>understands</b> French very well.", "Ele entende francês muito bem."],
+                    ["Past Simple (V2)", "understood", "understood", "Everybody <b>understood</b> the instructions.", "Todo mundo entendeu as instruções."],
+                    ["Past Participle (V3)", "understood", "understood", "She felt <b>understood</b> for the first time.", "Ela se sentiu compreendida pela primeira vez."],
+                    ["Gerund (-ING)", "understanding", "understanding", "Thank you for <b>understanding</b> our delay.", "Obrigado por entender o nosso atraso."],
+                    ["Future Simple", "will understand", "will understand", "You <b>will understand</b> this lesson easily.", "Você entenderá esta lição facilmente."]
+                ]
+            },
+            {
+                num: 30, verb: "WRITE", pt: "Escrever",
+                rows: [
+                    ["Present (I/You/We/They)", "write", "write", "I <b>write</b> emails every morning.", "Eu escrevo e-mails todas as manhãs."],
+                    ["Present 3ª P. (He/She/It)", "writes", "writes", "She <b>writes</b> poems in her free time.", "Ela escreve poemas no tempo livre dela."],
+                    ["Past Simple (V2)", "wrote", "wrote", "He <b>wrote</b> a beautiful letter to her.", "Ele escreveu uma linda carta para ela."],
+                    ["Past Participle (V3)", "written", "written", "This report was <b>written</b> by our team.", "Este relatório foi escrito pela nossa equipe."],
+                    ["Gerund (-ING)", "writing", "writing", "I am <b>writing</b> down the address.", "Estou anotando (escrevendo) o endereço."],
+                    ["Future Simple", "will write", "will write", "She <b>will write</b> a book one day.", "Ela escreverá um livro um dia."]
+                ]
+            }
+        ];
+
+        // RENDERIZA TODAS AS TABELAS DE CONJUGAÇÃO AUTOMATICAMENTE
+        const container = document.getElementById('verbs-container');
+        let htmlContent = '';
+
+        verbsData.forEach(item => {
+            htmlContent += `
+            <div class="verb-card">
+                <div class="verb-card-header">
+                    <span>${item.num}. ${item.verb} <button class="audio-btn-word" onclick="playAudio('${item.verb.toLowerCase()}')" title="Ouvir verbo base">🔊</button></span>
+                    <span class="translation">${item.pt}</span>
+                </div>
+                <table class="verb-conj-table">
+                    <thead>
+                        <tr>
+                            <th>Tempo Verbal / Sujeito</th>
+                            <th>Palavra Conjugada (Áudio)</th>
+                            <th>Frase de Exemplo (Áudio + Tradução)</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+
+            item.rows.forEach(r => {
+                const tenseLabel = r[0];
+                const wordDisplay = r[1];
+                const wordAudio = r[2].replace(/'/g, "\\'");
+                const sentenceHtml = r[3];
+                const sentencePt = r[4];
+                // Remove tags <b> para enviar texto limpo ao sintetizador de voz (ou usa pronúncia customizada em r[5])
+                const cleanSentenceAudio = (r[5] ? r[5] : sentenceHtml.replace(/<\/?b>/g, '')).replace(/'/g, "\\'");
+
+                htmlContent += `
+                        <tr>
+                            <td class="col-tense">${tenseLabel}</td>
+                            <td class="col-word">
+                                ${wordDisplay}
+                                <button class="audio-btn-word" onclick="playAudio('${wordAudio}')" title="Ouvir palavra">🔊</button>
+                            </td>
+                            <td class="col-example">
+                                <span class="example-en">${sentenceHtml}</span>
+                                <button class="audio-btn-inline" onclick="playAudio('${cleanSentenceAudio}')" title="Ouvir frase">🔊</button>
+                                <span class="example-pt">${sentencePt}</span>
+                            </td>
+                        </tr>`;
+            });
+
+            htmlContent += `
+                    </tbody>
+                </table>
+            </div>`;
+        });
+
+        container.innerHTML = htmlContent;
+
+        // SCRIPT DE VOZ (WEB SPEECH API)
+        let voices = [];
+        function loadVoices() { voices = window.speechSynthesis.getVoices(); }
+        loadVoices();
+        if (window.speechSynthesis.onvoiceschanged !== undefined) {
+            window.speechSynthesis.onvoiceschanged = loadVoices;
+        }
+
+        function playAudio(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 0.85;
+                utterance.pitch = 1;
+
+                if (voices.length === 0) loadVoices();
+                let targetVoice = voices.find(voice => 
+                    (voice.name.includes('Google') || voice.name.includes('Premium') || voice.name.includes('Samantha')) 
+                    && voice.lang.includes('en-US')
+                );
+                if (!targetVoice) targetVoice = voices.find(voice => voice.lang === 'en-US');
+                if (!targetVoice) targetVoice = voices.find(voice => voice.lang.startsWith('en'));
+
+                if (targetVoice) {
+                    utterance.voice = targetVoice;
+                    utterance.lang = targetVoice.lang;
+                } else {
+                    utterance.lang = 'en-US';
+                }
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+    </script>
+</body>
+</html>
